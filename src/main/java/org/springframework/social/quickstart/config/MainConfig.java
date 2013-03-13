@@ -69,7 +69,7 @@ public class MainConfig {
         Jdbc3PoolingDataSource source = new Jdbc3PoolingDataSource();
         source.setDataSourceName("PostgreSQL Data Source");
         source.setServerName(dbUri.getHost());
-        source.setDatabaseName(dbUri.getPath());
+        source.setDatabaseName(dbUri.getPath().replaceFirst("/", ""));
         
         source.setUser(username);
         source.setPassword(password);
