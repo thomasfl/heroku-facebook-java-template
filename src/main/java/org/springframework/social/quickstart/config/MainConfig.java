@@ -67,7 +67,7 @@ public class MainConfig {
         String dbUrl = "jdbc:postgresql://" + dbUri.getHost() + ':' + dbUri.getPort() + dbUri.getPath();
         
         Jdbc3PoolingDataSource source = new Jdbc3PoolingDataSource();
-        source.setDataSourceName("PostgreSQL Data Source");
+        // source.setDataSourceName("PostgreSQL Data Source");
         source.setServerName(dbUri.getHost());
         source.setDatabaseName(dbUri.getPath().replaceFirst("/", ""));
         
