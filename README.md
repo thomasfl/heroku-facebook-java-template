@@ -1,6 +1,15 @@
 Boligpriser.no
 ==============
 
+## Kom i gang med heroku
+
+Slik kan du deploye denne koden til heroku: 
+
+    $ heroku create boligpriser-staging
+    $ heroku config --app boligpriser-staging
+    $ export DATABASE_URL=postgres...
+    $ rake db:migrate:up
+
 ## Installer og kjør lokalt OSX
 
 Sett opp miljøvariablene så de er tilgjengelig både fra kommandolinjen og applikasjoner som Eclipse ved å legge inn
