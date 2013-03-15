@@ -44,8 +44,9 @@ public class HomeController {
 
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Model model) {
-		List<Reference> friends = facebook.friendOperations().getFriends();
-		model.addAttribute("friends", friends);
+		
+		// List<Reference> friends = facebook.friendOperations().getFriends();
+		// model.addAttribute("friends", friends);
 		
 		FacebookProfile userProfile = facebook.userOperations().getUserProfile();
 		String email = userProfile.getEmail();
@@ -56,6 +57,7 @@ public class HomeController {
 		String middleName = userProfile.getMiddleName();
 		String homeTown = userProfile.getHometown().getName();
 		String birthDay = userProfile.getBirthday();
+		String facebookId = userProfile.getId();
 		
 		model.addAttribute("email", email);
 		model.addAttribute("gender", gender);
@@ -64,7 +66,7 @@ public class HomeController {
 		model.addAttribute("middleName", middleName);
 		model.addAttribute("homeTown", homeTown);
 		model.addAttribute("birthDay", birthDay);
-		
+		model.addAttribute("facebookId", facebookId);
 		
 		return "home";
 	}

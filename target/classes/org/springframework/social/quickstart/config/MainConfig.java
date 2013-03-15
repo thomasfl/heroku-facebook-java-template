@@ -43,15 +43,6 @@ import org.springframework.social.connect.jdbc.JdbcUsersConnectionRepository;
 @PropertySource("classpath:org/springframework/social/quickstart/config/application.properties")
 public class MainConfig {
 
-	@Bean(destroyMethod = "shutdown")
-	public DataSource dataSource_original() {
-		EmbeddedDatabaseFactory factory = new EmbeddedDatabaseFactory();
-		factory.setDatabaseName("spring-social-quickstart");
-		factory.setDatabaseType(EmbeddedDatabaseType.H2);
-		factory.setDatabasePopulator(databasePopulator());
-		return factory.getDatabase();
-	}
-
 	@Bean
     public DataSource dataSource() throws Exception {
 		String databaseUrl = System.getenv("DATABASE_URL");
@@ -64,23 +55,13 @@ public class MainConfig {
         URI dbUri = new URI(databaseUrl);
         String username = dbUri.getUserInfo().split(":")[0];
         String password = dbUri.getUserInfo().split(":")[1];
-        String dbUrl = "jdbc:postgresql://" + dbUri.getHost() + ':' + dbUri.getPort() + dbUri.getPath();
-        
         Jdbc3PoolingDataSource source = new Jdbc3PoolingDataSource();
-        // source.setDataSourceName("PostgreSQL Data Source");
         source.setServerName(dbUri.getHost());
         source.setDatabaseName(dbUri.getPath().replaceFirst("/", ""));
-        
         source.setUser(username);
         source.setPassword(password);
         source.setMaxConnections(10);
         return source;
-//        
-//        DataSource basicDataSource = new DataSource();
-//        basicDataSource.setUrl(dbUrl);
-//        basicDataSource.setUsername(username);
-//        basicDataSource.setPassword(password);        
-//        return basicDataSource;
     }
 
 	// internal helpers
