@@ -20,6 +20,7 @@ import java.util.List;
 import javax.inject.Inject;
 
 import org.springframework.social.facebook.api.Facebook;
+import org.springframework.social.facebook.api.FacebookProfile;
 import org.springframework.social.facebook.api.Reference;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -45,6 +46,26 @@ public class HomeController {
 	public String home(Model model) {
 		List<Reference> friends = facebook.friendOperations().getFriends();
 		model.addAttribute("friends", friends);
+		
+		FacebookProfile userProfile = facebook.userOperations().getUserProfile();
+		String email = userProfile.getEmail();
+		
+		String gender = userProfile.getGender();
+		String firstName = userProfile.getFirstName();
+		String lastName = userProfile.getLastName();
+		String middleName = userProfile.getMiddleName();
+		String homeTown = userProfile.getHometown().getName();
+		String birthDay = userProfile.getBirthday();
+		
+		model.addAttribute("email", email);
+		model.addAttribute("gender", gender);
+		model.addAttribute("firstName", firstName);
+		model.addAttribute("lastName", lastName);
+		model.addAttribute("middleName", middleName);
+		model.addAttribute("homeTown", homeTown);
+		model.addAttribute("birthDay", birthDay);
+		
+		
 		return "home";
 	}
 
