@@ -55,7 +55,10 @@ public class HomeController {
 		String firstName = userProfile.getFirstName();
 		String lastName = userProfile.getLastName();
 		String middleName = userProfile.getMiddleName();
-		String homeTown = userProfile.getHometown().getName();
+		String homeTown = "";
+		if(userProfile.getHometown() != null){
+			homeTown = userProfile.getHometown().getName();
+		}
 		String birthDay = userProfile.getBirthday();
 		String facebookId = userProfile.getId();
 		
