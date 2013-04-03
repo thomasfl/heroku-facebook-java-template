@@ -50,20 +50,5 @@ namespace :db do
       puts "<= sq:migrate:down executed"
     end
 
-    # Custom tasks for event harvesting
-    desc "Empty all events"
-    task :empty do
-      events = DB[:events]
-      events.delete
-      venues = DB[:venues]
-      venues.delete
-      locations = DB[:locations]
-      locations.delete
-      sources = DB[:sources]
-      sources.delete
-      puts "<= sq:migrate:empty executed - database emptied"
-    end
-
-
   end
 end

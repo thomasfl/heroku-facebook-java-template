@@ -1,49 +1,62 @@
-Boligpriser.no
-==============
+Heroku Java Facebook Template
+=============================
 
-## Kom i gang med heroku
+This java template web application uses spring social for facebook integration, the
+ruby gem sequel for database migrations and jersey for json and rest api. It is
+basically a modified version of a spring-social sample project.
 
-Slik kan du deploye denne koden til heroku: 
+## Deploying to heroku
 
-    $ heroku create boligpriser-staging
-    $ heroku config --app boligpriser-staging
+To deploy, you need to install the heroku command line interface and create an account on heroku.
+
+    $ heroku create my-social-app
+    $ heroku config --app my-social-app
     $ export DATABASE_URL=postgres...
     $ rake db:migrate:up
 
-## Installer og kjør lokalt OSX
+## Running locally on OSX
 
-Sett opp miljøvariablene så de er tilgjengelig både fra kommandolinjen og applikasjoner som Eclipse ved å legge inn
+To make environment variables accessible from Eclipse, run:
 
-    setenv LOCAL_BOLIGER_DATABASE_URL postgres://brukernavn:passord@host:5432/basenavn
-    setenv REMOTE_BOLIGER_DATABASE_URL postgres://brukernavn:passord@host:5432/basenavn
+    $ sudo vi /etc/launchd.conf
 
-## Preparer database
+Then add this two lines:
 
-For å installere PostgreSQL lokalt På OSX på Lion eller senere anbefals http://postgresapp.com/
-For eldre versjoner av OSX, kan man installere med homebrew:
+    setenv LOCAL_TEMPLATE_DATABASE_URL postgres://username:password@host:5432/basenavn
+    setenv REMOTE_TEMPLATE_DATABASE_URL postgres://username:password@host:5432/basenavn
+
+## Prepare PostgresSQL locally
+
+To install PostgreSQL locally on OSX Lion use the installer from http://postgresapp.com/
+Older versions of OSX can install via homebrew:
 
     $ brew install postgresql
 
-Opprett bruker og database
+Then create user and a database:
 
     $ createuser boligpriser --no-superuser --no-createrole --createdb
 
 
-## Kjøre lokalt fra Eclipse
+## Running locally from within Eclipse
 
-Kan anbefale en Eclipse plugin ved navn "Run Jetty Run" for å kjøre webapplikasjonen fra Eclipse.
-Den benytter Java HotSwap så man slipper å ta omstart hvis man har gjort noen små endringer i javakoden.
+The simple Eclipse plugin "Run Jetty Run" can be used to run the webapp.
+It uses Java HotSwap so you don't have to restart the web app if you've only done
+small changes to the java code.
 
-## Migreringer
+## Migrations
 
-Migreringsscriptene er skrevet i ruby og bruker biblioteket sequel. For å kjøre migreringsscriptene lokalt må først ruby installeres. På OSX er ruby allerede installert. På Windows anbefales http://railsinstaller.org.
+Migration scripts are written in ruby and the sequel rubygems.
+On OSX ruby is preinstalled. On Windows I can recommend  http://railsinstaller.org.
+To run the migration:
 
-## Arkitektur
+    $ export DATABASE_URL=postgres://username:password@host:5432/basenavn
+    $ rake db:migrate:up
 
-Nettstedet er utviklet i java og bruker disse bibliotekene:
+## Architecture
+
+The application uses the following libs:
 
  * REST kall bruker jersey og jackson
-
 
 Spring Social Quickstart
 ========================
